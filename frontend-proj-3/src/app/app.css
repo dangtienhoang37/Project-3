@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.App {
+    min-width: 100vw;
+    min-height: 100vh;
+
+}
+
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0858f7;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #ebe9e9;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.main {
+    margin-top: 70px;
+}
+
+
+.main .sidebarWrapper {
+    width: 17%;
+    flex: 0 0 17%;
+    transition: all 0.3s ease-in-out;
+}
+
+.main .sidebarWrapper .sidebar {
+    width: 17%;
+    height: 100vh;
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    background: #fff;
+    max-height: calc(100% - 70px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.main .sidebarWrapper .sidebar::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}
+
+.main .sidebarWrapper:hover .sidebar::-webkit-scrollbar {
+    background: #0858f7 !important;
+
+}
+
+.main .sidebarWrapper .sidebar ul {
+    margin-bottom: 0px;
+    left: 0;
+    padding: 0px;
+}
+
+.main .sidebarWrapper .sidebar ul li {
+    list-style: none;
+    width: 100%;
+
+}
+
+.main .sidebarWrapper .sidebar ul li button {
+    color: #5e5d72;
+    text-align: left;
+    justify-content: left;
+    border-radius: 0px !important;
+    padding: 12px 15px !important;
+    align-items: center;
+    font-weight: 500 !important;
+
+}
+
+.main .sidebarWrapper .sidebar ul li button.active {
+    background: rgba(109, 109, 109, 0.1);
+
+}
+
+.main .sidebarWrapper .sidebar ul li button .icon {
+    display: flex;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.main .sidebarWrapper .sidebar ul li button .icon svg {
+    color: #000;
+    opacity: 0.8;
+    font-size: 22px;
+}
+
+.main .sidebarWrapper .sidebar ul li button .arrow {
+    margin-left: auto;
+    font-size: 20px;
+    justify-content: center;
+    display: flex;
+    width: 25px;
+    height: 25px;
+
+
+}
+
+.main .sidebarWrapper .sidebar ul li button.btn {
+    margin: 10px 0;
+}
+
+.main #content {
+    width: 83%;
+    flex: 0 0 83%;
+
+}
