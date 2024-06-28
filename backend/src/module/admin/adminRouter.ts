@@ -10,7 +10,7 @@ const adminController = new AdminController();
 // phai check neu la admin=> them middleware
 adminRouter.route("/get-all-staff").get(asyncHandler(adminController.getAllStaff));// done
 adminRouter.route("/find-staff/:id").get(); 
-adminRouter.route("/staffProfile/:id").get(asyncHandler(adminController.staffProfile));//done
+adminRouter.route("/staff-profile/:id").get(asyncHandler(adminController.staffProfile));//done
 adminRouter.route("/registerStaff").post();
 adminRouter.route("/delStaff").post();
 adminRouter.route("/updateInforStaff").patch();
