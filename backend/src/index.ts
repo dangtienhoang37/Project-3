@@ -8,6 +8,7 @@ import middlewares from './middleware';
 import bodyParser from 'body-parser';
 import { connectDB } from './config/db';
 import { initDatabase } from './config/init.db';
+import multer from 'multer'
 // import router from './routers';
 
 // connect db

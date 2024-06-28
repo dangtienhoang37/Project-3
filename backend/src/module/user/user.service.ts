@@ -23,5 +23,12 @@ export class UserService {
             raw: true
         })
     }
+    public findById = (data: string) => {
+        return User.findOne({
+            where: {
+                userId: data
+            }
+        })
+    }
 
 }
