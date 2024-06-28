@@ -1,12 +1,16 @@
 import { Router } from "express";
+import AdminController from "./admin.controller";
+import { asyncHandler } from "../../common/helper/asyncHandler";
 
 
 
 const adminRouter = Router();
+const adminController = new AdminController();
 // staff
-adminRouter.route("/getAllStaff").post();
-adminRouter.route("/findStaff").post();
-adminRouter.route("/staffProfile").get();
+// phai check neu la admin=> them middleware
+adminRouter.route("/get-all-staff").get(asyncHandler(adminController.getAllStaff));// done
+adminRouter.route("/find-staff/:id").get(); 
+adminRouter.route("/staff-profile/:id").get(asyncHandler(adminController.staffProfile));//done
 adminRouter.route("/registerStaff").post();
 adminRouter.route("/delStaff").post();
 adminRouter.route("/updateInforStaff").patch();

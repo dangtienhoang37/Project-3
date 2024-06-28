@@ -110,7 +110,7 @@ export default class AccountController {
             email: data.email,
             address: data.address,
             dateOfBirth: data.dateOfBirth,
-            portraitImage: 'test'
+            portraitImage: 'https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?t=st=1719567139~exp=1719570739~hmac=e1b8e6507a800e2bac91ce4fc3214392d3a04204dbbd0abb72b2d26fe2b47126&w=740'
         })
         const keyPair = await createKeyPair();
         const _accountId = v4();
@@ -172,5 +172,101 @@ export default class AccountController {
         // check keystore with userid
         //  ok => next()
         
+    }
+    public getProfile = async (req: Request, res: Response, next: NextFunction) => {
+        const userId = req.headers[HEADER.CLIENT_ID];
+        if(!userId) {
+            throw new ErrorObject('Invalid Request',ApiStatusCode.FORBIDDEN,'');
+        }
+        const _account = await this._accountService.findById(userId);
+        if(!_account) {
+            throw new ErrorObject('invalid Requeset',ApiStatusCode.BAD_REQUEST,'');
+        }
+
+        // console.log(_account);
+        if(_account) {
+            const _user = await this._userService.findById(_account?.userId)
+            const _res: IBaseRespone = {
+                status: ApiStatus.succes,
+                isSuccess: true,
+                statusCode: ApiStatusCode.OK,
+                message: "get profile sucessfully!",
+                data: {
+                    user: _user
+                }
+            }
+            res.status(ApiStatusCode.OK).json(_res);
+        }
+        
+
+    }
+    public updateAvatar = async (req: Request, res: Response, next:NextFunction) => {
+        const userId = req.headers[HEADER.CLIENT_ID];
+        // const img = 
+        if(!userId) {
+            throw new ErrorObject('Invalid Request',ApiStatusCode.FORBIDDEN,'');
+        }
+        const _account = await this._accountService.findById(userId);
+        if(!_account) {
+            throw new ErrorObject('invalid Requeset',ApiStatusCode.BAD_REQUEST,'');
+        }
+        if(_account) {
+            const _user = await this._userService.findById(_account?.userId)
+
+            const _res: IBaseRespone = {
+                status: ApiStatus.succes,
+                isSuccess: true,
+                statusCode: ApiStatusCode.OK,
+                message: "update avatar sucessfully!",
+                data: {
+                    
+                }
+            }
+            res.status(ApiStatusCode.OK).json(_res);
+        }
+    }
+    public updatePassword = async (req: Request, res: Response, next: NextFunction) => {
+        const userId = req.headers[HEADER.CLIENT_ID];
+        const oldPassword = req.body.oldPassword;
+        const newPassword = req.body.newPassword;
+        if(!oldPassword || !newPassword) {
+            throw new ErrorObject('enter old/new password',ApiStatusCode.BAD_REQUEST,"");
+        }
+
+        if(!userId) {
+            throw new ErrorObject('Invalid Request',ApiStatusCode.FORBIDDEN,'');
+        }
+        const _user = await this._accountService.findById(userId);
+        console.log(_user?.password);
+        
+        if(!_user) {
+            throw new ErrorObject('BAD REQUEST',ApiStatusCode.BAD_REQUEST,'');
+
+        }
+
+        const isTruePassword = await bcrypt.compareSync(oldPassword, _user.password);
+        console.log("test pass",isTruePassword);
+        
+        if(isTruePassword == false) {
+            throw new ErrorObject("wrong password",ApiStatusCode.BAD_REQUEST,"");
+        }
+        if(isTruePassword == true) {
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+            await this._accountService.updateById(userId,hashedPassword)
+            .then(() => {
+
+                const _res: IBaseRespone = {
+                    status: ApiStatus.succes,
+                    isSuccess: true,
+                    statusCode: ApiStatusCode.CREATED,
+                    message: "update Password Sucessfully!",
+                    data: {}
+                }
+                return res.status(ApiStatusCode.CREATED).json(_res);
+            })
+            
+        }
+
     }
 }
