@@ -12,7 +12,7 @@ export const errorHandler = (err: any, req: any, res: any, next: any) => {
         data: ''
     }
     // logger
-    logger.fail("error", err.message);
+    logger.fail("", err.message);
     res.status(err.statusCode).json(_res)
 
 }
