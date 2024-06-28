@@ -9,7 +9,8 @@ export default class ErrorObject extends Error {
     constructor(message: string, statusCode: ApiStatusCode, actionError: string) {
         super();
         this.message = message;
-        this.actionError = actionError;
         this.statusCode = statusCode
+
+        this.actionError = actionError;
     }
 }
