@@ -15,7 +15,7 @@ accountRouter.route("/logout").post(asyncHandler(accountController.logout));
 accountRouter.route("/profile").get(asyncHandler(accountController.getProfile));//done
 accountRouter.route("/profile/update-avatar").patch(asyncHandler(accountController.updateAvatar));
 accountRouter.route("/profile/update-password").patch(asyncHandler(accountController.updatePassword));// done
-accountRouter.route("/profile/forgot-password").patch();// done
+accountRouter.route("/profile/forgot-password").patch();
 
 
 

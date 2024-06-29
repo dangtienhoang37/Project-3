@@ -51,10 +51,23 @@ export class AccountService {
             attributes:['accountId','username','password','status','permissions','userId',]
         });
     }
-    public joinById = (id: any) => {
+    public joinById = (id: string) => {
         return Account.findOne ({
             where: {
                 accountId: id
+            },
+            include: [{
+                model: User,
+                required: true,
+                attributes:['fullName','gender','phoneNumber','idNumber','email','address','dateOfBirth','portraitImage']
+            }],
+            attributes:['accountId','username','password','status','permissions','userId',]
+        })
+    }
+    public joinByUserId = (userId: string) => {
+        return Account.findOne({
+            where: {
+                userId: userId
             },
             include: [{
                 model: User,

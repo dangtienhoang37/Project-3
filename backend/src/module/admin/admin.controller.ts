@@ -50,4 +50,46 @@ export default class AdminController{
         return res.status(ApiStatusCode.OK).json(_res);
 
     }
+    public findStaff = async (req: Request, res: Response, next: NextFunction) => {
+        let searchTerm = req.query.name;
+        if(Array.isArray(searchTerm)){
+            searchTerm = searchTerm[0];
+        }
+        if(typeof searchTerm !== 'string'){
+            throw new ErrorObject('invalid search term',ApiStatusCode.BAD_REQUEST,"")
+        }
+        searchTerm = searchTerm.toLowerCase();
+        const user = await this._userService.findAllByName(searchTerm);
+        console.log("user: ",user);
+        
+        if(!user) {
+            throw new ErrorObject("cant find this staff!", ApiStatusCode.NOT_FOUND,"");
+        }
+        if(user) {
+            let resultSearch : any[] = []
+            // user.forEach( async element => {
+            //     const userId = element.userId;
+            //     const resultSearch1 = await this._accountService.joinByUserId(userId);
+            //     resultSearch += resultSearch1;
+            // })
+            for (const element of user) {
+                const userId = element.userId;
+                const resultSearch1 = await this._accountService.joinByUserId(userId);
+                resultSearch.push(resultSearch1);
+            }
+            
+            
+            const _res: IBaseRespone = {
+                status: ApiStatus.succes,
+                isSuccess: true,
+                statusCode: ApiStatusCode.OK,
+                message: "find staff sucessfully!",
+                data: {
+                    staff: resultSearch
+                }
+            }
+            return res.status(ApiStatusCode.OK).json(_res);
+        }
+
+    }
 }

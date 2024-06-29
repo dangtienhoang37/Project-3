@@ -1,3 +1,4 @@
+import { Op } from "sequelize"
 import { IBaseRespone } from "../../common/model/response"
 import User from "../user/user.schema"
 // import Account from "./account.schema"
@@ -7,10 +8,21 @@ export class UserService {
     constructor() {
 
     }
-    public findByKey = (data: any) => {
+    public findByName = (data: any) => {
         return User.findOne({
             where: {
-                username: data
+                fullName: data
+            },
+            raw: true
+        })
+    }
+    public findAllByName = (data: string) => {
+        const searchString = `%${data}%`
+        return User.findAll({
+            where: {
+                fullName: {
+                    [Op.like]: searchString
+                },
             },
             raw: true
         })
