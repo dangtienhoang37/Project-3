@@ -39,7 +39,7 @@ const Sidebar = () => {
                             </Button>
                         </Link>
                         {/* nhan vien */}
-                        <Link to='/user'>
+                        <Link to='/staff'>
                             <Button className={`w-100 btn ${activeTab === 5 ? 'active' : ''}`} onClick={() => { isOpen(5) }}>
                                 <span className='icon'><AdminPanelSettingsIcon /></span>
                                 Staff

@@ -8,10 +8,12 @@ import Invoice from '../module/invoice/invoice.schema';
 import ParkingLot from '../module/parking/parkingLot/parkinglot.schema';
 import ParkingSpot from '../module/parking/parkingSpot/parkingSpot.schema';
 import Rate from '../module/rate/rate.schema';
+import KeyToken from '../module/KeyTokens/keytoken.schema';
 import User from '../module/user/user.schema';
+import TokenUsed from '../module/TokenUsed/TokenUsed.schema';
 
 // Mảng các model
-const models = [User, Account, ParkingLot, Vehicle, Area, BookingSchedule, Rate, Invoice, ParkingSpot, ApiKey];
+const models = [User, Account, ParkingLot, Vehicle, Area, BookingSchedule, Rate, Invoice, ParkingSpot, ApiKey, KeyToken, TokenUsed];
 
 // Khởi tạo các bảng chưa tồn tại vào cơ sở dữ liệu
 export const initDatabase = async () => {

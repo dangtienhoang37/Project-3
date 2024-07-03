@@ -11,9 +11,9 @@ class Account extends Model {
     public permissions!: string;
     public userId!: string;
     public accessToken!: string;
-    public refreshToken!: string;
-    public publicKey!: string;
-    public privateKey!: string;
+    // public refreshToken!: string;
+    // public publicKey!: string;
+    // public privateKey!: string;
 }
 
 Account.init(
@@ -44,18 +44,18 @@ Account.init(
             type: DataTypes.UUID,
             allowNull: false,
         },
-        refreshToken: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        publicKey: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-        privateKey: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
+        // refreshToken: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        // },
+        // publicKey: {
+        //     type: DataTypes.TEXT,
+        //     allowNull: false,
+        // },
+        // privateKey: {
+        //     type: DataTypes.TEXT,
+        //     allowNull: false,
+        // },
     },
     {
         sequelize,

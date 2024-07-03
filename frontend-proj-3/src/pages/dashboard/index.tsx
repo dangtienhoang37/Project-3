@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="right-content w-100">
+            <div className="right-content w-100 dashboard-container">
                 <div className="row dashboardBoxWrapperRow">
                     <div className="col-md-7">
                         <div className="dashboardBoxWrapper d-flex">
@@ -36,7 +36,7 @@ const Dashboard = () => {
                 </div>
                 <div className="card shadow border-0 p-3 ">
                     <h4 className="hd">statistical</h4>
-                    <div className="row cardFilter mt-3">
+                    {/* <div className="row cardFilter mt-3">
                         <div className="col-md-3 mb-3">
                             <h4>SHOW BY</h4>
                             <FormControl size="small" className='w-100'>
@@ -77,10 +77,10 @@ const Dashboard = () => {
                             </FormControl>
 
                         </div>
-                    </div>
+                    </div> */}
                     <div className="table-responsive">
                         <table className='table table-bordered v-align'>
-                            <thead className="table-dark">
+                            <thead className="table-dark sticky-table">
                                 <tr>
                                     <th scope="col">UID</th>
                                     <th scope="col" style={{ width: '250px' }}>Name</th>
@@ -114,6 +114,7 @@ const Dashboard = () => {
                                         </div>
                                     </td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>

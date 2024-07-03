@@ -7,3 +7,10 @@ export interface tokenPair {
     accessToken: string,
     refreshToken: string
 }
+export interface decodeUser {
+    username: string,
+    id: string,
+    permission: string,
+    status: boolean
+
+}

@@ -1,0 +1,79 @@
+.card {
+    margin: 20px 0px;
+    border-radius: 10px;
+
+}
+
+.card .hd {
+    font-weight: bold;
+    color: #403e57;
+    font-size: 25px;
+
+}
+
+.cardFilter .col h4 {
+    font-weight: 800;
+    font-size: 25px;
+    text-transform: capitalize;
+    color: #403e57;
+}
+
+.table .table-dark th {
+    background-color: #9ed8a3 !important;
+    border-color: rgb(0, 0, 0);
+    font-size: 13px !important;
+    text-transform: uppercase;
+
+}
+
+.table tbody td {
+    font-size: 13px !important;
+    color: #403e57;
+    font-weight: 700;
+}
+
+.table tbody .actions {
+    display: flex;
+    justify-content: center;
+    /* Đảm bảo các nút button được căn cách nhau ra hai đầu */
+}
+
+.actions>button {
+    flex: 1;
+    /* Căn chỉnh kích thước các button để chúng phù hợp với kích thước của các icon bên trong */
+}
+
+
+.table tbody .actions button {
+    min-width: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+
+
+.table tbody .actions button svg {
+    font-size: 20px !important;
+
+}
+
+table .v-align td {
+    vertical-align: middle !important;
+}
+
+table td .infor h6 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+table td .InforBox {
+    width: 200px;
+}
+
+table td .InforBox .infor {
+    width: 100%;
+}
