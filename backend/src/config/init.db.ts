@@ -11,9 +11,10 @@ import Rate from '../module/rate/rate.schema';
 import KeyToken from '../module/KeyTokens/keytoken.schema';
 import User from '../module/user/user.schema';
 import TokenUsed from '../module/TokenUsed/TokenUsed.schema';
+import Wallet from '../module/wallet/wallet.shema';
 
 // Mảng các model
-const models = [User, Account, ParkingLot, Vehicle, Area, BookingSchedule, Rate, Invoice, ParkingSpot, ApiKey, KeyToken, TokenUsed];
+const models = [User, Account, ParkingLot, Vehicle, Area, BookingSchedule, Rate, Invoice, ParkingSpot, ApiKey, KeyToken, TokenUsed, Wallet];
 
 // Khởi tạo các bảng chưa tồn tại vào cơ sở dữ liệu
 export const initDatabase = async () => {

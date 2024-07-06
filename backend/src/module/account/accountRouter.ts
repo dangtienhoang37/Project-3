@@ -13,7 +13,7 @@ accountRouter.route("/login").post(asyncHandler(accountController.login)); //don
 // register phai verify email
 accountRouter.route("/register").post(asyncHandler(accountController.signUp)); //done
 accountRouter.use(authenticaton)
-accountRouter.route("/logout").post(asyncHandler(accountController.logout));
+accountRouter.route("/logout").post(asyncHandler(accountController.logout)); //done
 accountRouter.route("/profile").get(asyncHandler(accountController.getProfile));//done
 accountRouter.route("/profile/update-avatar").patch(asyncHandler(accountController.updateAvatar));
 accountRouter.route("/profile/update-password").patch(asyncHandler(accountController.updatePassword));// done

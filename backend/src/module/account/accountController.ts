@@ -46,6 +46,7 @@ export default class AccountController {
             return next(err);
         }
         if (account !== null) {
+            if (account.status == 'inactive') throw new ErrorObject("Account has been locked!", ApiStatusCode.FORBIDDEN, "")
             const safeAccount: Account = account;
 
             if (bcrypt.compareSync(password, account.password)) {
@@ -113,15 +114,17 @@ export default class AccountController {
     }
     public signUp = async (req: any, res: any, next: any) => {
         // return res
-        const transaction = sequelize.transaction();
+        const t = await sequelize.transaction();
 
 
         const data = req.body;
         const email = data.email;
+        const username = data.username;
         const existAcc = await this._userService.findByEmail(email)
-        if (existAcc) {
+        const existUsername = await this._accountService.findByKey(username);
+        if (existAcc || existUsername) {
             // logger.fail('Email already used', email);
-            const err: any = new ErrorObject('Email already used', ApiStatusCode.BAD_REQUEST, email)
+            const err: any = new ErrorObject('Account already used', ApiStatusCode.BAD_REQUEST, email)
             return next(err);
         }
         // xu li upload anh
@@ -138,9 +141,11 @@ export default class AccountController {
             address: data.address,
             dateOfBirth: data.dateOfBirth,
             portraitImage: 'https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?t=st=1719567139~exp=1719570739~hmac=e1b8e6507a800e2bac91ce4fc3214392d3a04204dbbd0abb72b2d26fe2b47126&w=740'
+        }, {
+            transaction: t
         })
         if (!newUser) {
-            (await transaction).rollback
+            await t.rollback()
         }
         const keyPair = await createKeyPair();
         const _accountId = v4();
@@ -152,31 +157,25 @@ export default class AccountController {
             status: 'active',
             permissions: 'user',
             userId: newUser.userId,
-            // userId: await this._userService.findByEmail(email).then(user => {
-            //     if (user) {
-            //         return user.userId;
-            //     } else {
-            //         throw new ErrorObject('fail to find email- 71- acc-controller', ApiStatusCode.CONFLICT, '')
-            //     }
-            // })
-            //     .catch(err => {
-            //         throw new ErrorObject(err.toString(), ApiStatusCode.FAILED_DEPENDENCY, '')
-            //     })
-            refreshToken: '',
-            publicKey: keyPair.privateKey,
-            privateKey: keyPair.privateKey,
-        })
+
+
+        },
+            {
+                transaction: t
+            })
         const keyToken = await KeyToken.create({
             accountId: _accountId,
             refeshToken: '',
             publicKey: keyPair.publicKey,
             privateKey: keyPair.privateKey
+        }, {
+            transaction: t
         })
         if (!keyToken) {
-            (await transaction).rollback
+            await t.rollback();
         }
 
-        await (await transaction).commit()
+        await t.commit();
         const _res: IBaseRespone = {
             status: ApiStatus.succes,
             isSuccess: true,

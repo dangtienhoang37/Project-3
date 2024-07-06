@@ -4,6 +4,7 @@ import Vehicle from '../Vehicle/vehicle.schema';
 import ParkingLot from '../parking/parkingLot/parkinglot.schema';
 import { sequelize } from '../../config/db';
 import Rate from '../rate/rate.schema';
+import Account from '../account/account.schema';
 
 
 class Invoice extends Model {
@@ -21,9 +22,13 @@ class Invoice extends Model {
 Invoice.init(
     {
         invoiceId: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
+        },
+        accountId: {
+            type: DataTypes.UUID,
+            allowNull: false
         },
         licensePlate: {
             type: DataTypes.STRING,
@@ -66,8 +71,9 @@ Invoice.init(
 );
 
 // Tạo mối quan hệ một-nhiều giữa bảng Invoice và các bảng khác
-Invoice.belongsTo(ParkingLot, { foreignKey: 'parkingLotId' });
-Invoice.belongsTo(Rate, { foreignKey: 'rateId' });
-Invoice.belongsTo(Vehicle, { foreignKey: 'licensePlate' });
+Invoice.belongsTo(ParkingLot, { foreignKey: 'parkingLotId', targetKey: 'parkingLotId' });
+Invoice.belongsTo(Rate, { foreignKey: 'rateId', targetKey: 'rateId' });
+Invoice.belongsTo(Vehicle, { foreignKey: 'licensePlate', targetKey: 'licensePlate' });
+Invoice.belongsTo(Account, { foreignKey: 'accountId', targetKey: 'accountId' })
 
 export default Invoice;
